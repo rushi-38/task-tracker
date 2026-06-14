@@ -22,7 +22,7 @@ const ExpressError =
 require("./utils/ExpressError.js");
 
 const wrapAsync =
-require("./utils/wrapAsync");
+require("./utils/wrapasync");
 
 // models
 
@@ -35,7 +35,7 @@ require("./models/user");
 // utils
 
 const getRemainingDays =
-require("./utils/remainingDays");
+require("./utils/remainingdays");
 
 // middleware
 
