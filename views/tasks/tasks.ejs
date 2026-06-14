@@ -62,9 +62,12 @@
 
                         <div class="card-body d-flex justify-content-between">
 
-                            <button type="button" class="btn btn-light ">
-                                Edit Task
-                            </button>
+                          <a 
+    href="/task/<%= task._id %>/edit"
+    class="btn btn-light text-decoration-none"
+>
+    Edit Task
+</a>
 
                             <%if(task.status!="Completed"){%>
                                 <button type="button" class="btn btn-success">

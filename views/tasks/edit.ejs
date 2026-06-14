@@ -1,0 +1,77 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-5">
+
+    <div class="card col-md-6 mx-auto">
+
+        <div class="card-header text-center">
+            Edit Task
+        </div>
+
+        <div class="card-body">
+
+            <form
+                action="/task/<%= task._id %>/edit"
+                method="POST"
+            >
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Task Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="taskName"
+                        class="form-control"
+                        value="<%= task.taskName %>"
+                        required
+                    >
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Description
+                    </label>
+
+                    <textarea
+                        name="description"
+                        class="form-control"
+                        required
+                    ><%= task.description %></textarea>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Due Date
+                    </label>
+
+                    <input
+                        type="date"
+                        name="dueDate"
+                        class="form-control"
+                        value="<%= task.dueDate.toISOString().split('T')[0] %>"
+                        required
+                    >
+
+                </div>
+
+                <button
+                    class="btn btn-primary"
+                    type="submit"
+                >
+                    Update Task
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

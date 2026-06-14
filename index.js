@@ -49,7 +49,7 @@ const app = express();
 
 // database url
 
-const url = process.env.ATLASDB_URL;
+const dbUrl = process.env.ATLASDB_URL;
 
 // port
 
@@ -61,7 +61,7 @@ async function main() {
 
     try {
 
-        await mongoose.connect(url);
+        await mongoose.connect(dbUrl);
 
         console.log(
             "Connected To MongoDB"
@@ -122,7 +122,7 @@ app.use(
 const store =
 MongoStore.create({
 
-    mongoUrl: url,
+    mongoUrl: dbUrl,
 
     crypto: {
         secret:process.env.SECRET
@@ -663,7 +663,96 @@ app.post(
     })
 
 );
+// edit form
 
+app.get(
+
+    "/task/:id/edit",
+
+    isLoggedIn,
+
+    wrapAsync(async (req, res) => {
+
+        const { id } =
+        req.params;
+
+        const task =
+        await Task.findOne({
+
+            _id: id,
+
+            owner:
+            req.user._id
+
+        });
+
+        if (!task) {
+
+            req.flash(
+                "error",
+                "Task Not Found"
+            );
+
+            return res.redirect(
+                "/dashboard"
+            );
+
+        }
+
+        res.render(
+
+            "tasks/edit",
+
+            { task }
+
+        );
+
+    })
+
+);
+// update task
+
+app.post(
+
+    "/task/:id/edit",
+
+    isLoggedIn,
+
+    wrapAsync(async (req, res) => {
+
+        const { id } =
+        req.params;
+
+        await Task.findOneAndUpdate(
+
+            {
+
+                _id: id,
+
+                owner:
+                req.user._id
+
+            },
+
+            req.body
+
+        );
+
+        req.flash(
+
+            "success",
+
+            "Task Updated Successfully"
+
+        );
+
+        res.redirect(
+            "/dashboard"
+        );
+
+    })
+
+);
 // login form
 
 app.get(
