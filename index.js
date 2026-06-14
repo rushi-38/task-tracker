@@ -19,7 +19,7 @@ const LocalStrategy =
 require("passport-local");
 
 const ExpressError =
-require("./utils/ExpressError");
+require("./utils/ExpressError.js");
 
 const wrapAsync =
 require("./utils/wrapAsync");
