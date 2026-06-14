@@ -1,0 +1,144 @@
+<% layout("/layouts/boilerplate") %>
+<% tasks.forEach(task => { %>
+
+    <% if(task.remainingDays.includes("Overdue")) { %>
+
+        <div class="alert alert-danger">
+
+            <strong>
+                Reminder:
+            </strong>
+
+            "<%= task.taskName %>"
+            is overdue!
+
+        </div>
+
+    <% } %>
+
+<% }) %>
+    <% total_tasks=0; total_pending=0; total_progress=0; tasks.forEach((task)=>{
+        total_tasks++;
+
+        if(task.status==="Pending"){
+        total_pending++;
+        }
+        if(task.status==="In Progress"){
+        total_progress++;
+        }
+        })
+        %>
+        <%
+        tasks.forEach((task) => {
+
+   const today = new Date();
+
+   const due = new Date(task.dueDate);
+
+   const diff = due - today;
+
+   task.remainingDays =
+      Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+});
+        %>
+
+
+
+        <!-- dashboard top cards -->
+        <div class="container mt-4">
+
+            <div class="row justify-content-evenly g-4">
+
+                <div class="col-md-3">
+
+                    <div class="card text-center p-3">
+
+                        <p>TOTAL TASK</p>
+
+                        <h1>
+                            <%= total_tasks %>
+                        </h1>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="card text-center p-3">
+
+                        <p>PENDING TASKS</p>
+
+                        <h1>
+                            <%= total_pending %> / <%= total_tasks %>
+                        </h1>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="card text-center p-3">
+
+                        <p>TASKS IN PROGRESS</p>
+
+                        <h1>
+                            <%= total_progress %> / <%= total_tasks %>
+                        </h1>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <br><br>
+        <!-- tables -->
+
+
+        <table class="table table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">remainingDays</th>
+                    <th scope="col">status</th>
+                    <th scope="col">mark as done</th>
+                    <th scope="col">view</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%count=0;%>
+                    <% tasks.forEach((task)=> { %>
+
+                        <% if(task.status==="Pending" ||task.status==="In Progress" ){ %>
+
+                            <%count++%>
+                                <tr>
+                                    <th scope="row">
+                                        <%= count%>
+                                    </th>
+                                    <td>
+                                        <%=task.taskName%>
+                                    </td>
+                                    <td>
+                                        <%= task.remainingDays%>
+                                    </td>
+                                    <td>
+                                        <%= task.status%>
+                                    </td>
+                                    <td>
+                                        <a href="/task/<%= task._id %>/done"class="btn btn-success">Done</a>
+                                    </td>
+                                    <td><a href="/tasks/<%= task._id %>/view" class="btn btn-info">
+                                            View
+                                        </a>
+                                    </td>
+                                </tr>
+                                <% } %>
+                                    <% }) %>
+            </tbody>
+        </table>

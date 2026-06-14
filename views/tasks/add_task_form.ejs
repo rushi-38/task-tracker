@@ -1,0 +1,141 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container d-flex justify-content-center mt-5">
+
+    <div class="card col-md-6 border shadow">
+
+        <div class="card-header text-center">
+            Add Task
+        </div>
+
+        <div class="card-body">
+
+            <form
+                class="row g-3 needs-validation"
+                method="POST"
+                action="/addtask"
+                novalidate
+            >
+
+                <div class="col-md-12">
+
+                    <label
+                        for="title"
+                        class="form-label"
+                    >
+                        Title
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="title"
+                        name="taskName"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Please enter task title.
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+
+                    <label
+                        for="description"
+                        class="form-label"
+                    >
+                        Description
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="description"
+                        name="description"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Please enter description.
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+
+                    <label
+                        for="date"
+                        class="form-label"
+                    >
+                        Due Date
+                    </label>
+
+                    <input
+                        type="date"
+                        class="form-control"
+                        id="date"
+                        name="dueDate"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Please select due date.
+                    </div>
+
+                </div>
+
+                <div class="col-12 text-center">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        Add Task
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+(() => {
+
+    'use strict';
+
+    const forms =
+    document.querySelectorAll('.needs-validation');
+
+    Array.from(forms).forEach((form) => {
+
+        form.addEventListener(
+            'submit',
+            (event) => {
+
+                if (!form.checkValidity()) {
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+                }
+
+                form.classList.add('was-validated');
+
+            },
+            false
+        );
+
+    });
+
+})();
+
+</script>

@@ -1,0 +1,32 @@
+<% layout("/layouts/boilerplate") %>
+   
+        <div class="container mt-4">
+
+            <div class="card p-4">
+
+                <h1>
+                    <%= task.taskName %>
+                </h1>
+
+                <p>
+                    <%= task.description %>
+                </p>
+
+                <p>
+                    Remaining Days:
+                    <%= task.remainingDays %>
+                </p>
+
+                <p>
+                    Status:
+                    <%= task.status %>
+                </p>
+                <div class="card-body">
+                    <a type="button" class="btn btn-light">Edit Task</a>
+                    <a href="/task/<%= task._id %>/start" class="btn btn-info">Start</a>
+                     <a href="/task/<%= task._id %>/delete" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+
+
+        </div>

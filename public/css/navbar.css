@@ -1,0 +1,12 @@
+.navbar{
+    background-color: azure;
+}
+.links{
+    font-size: large;
+}
+.lgsnup{
+    padding: 1rem;
+    font-weight: bold;
+    font-size: large;
+    cursor: pointer;
+}

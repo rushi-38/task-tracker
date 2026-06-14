@@ -1,0 +1,85 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+    <div class="container mt-4">
+
+        <div class="row justify-content-evenly g-4">
+
+            <% tasks.forEach((task)=> { %>
+
+                <div class="col-12 col-md-6 col-lg-3">
+
+                    <div class="card task-card h-100">
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">
+                                <%= task.taskName %>
+                            </h5>
+
+                            <p class="card-text">
+                                <%= task.description %>
+                            </p>
+
+                        </div>
+
+                        <ul class="list-group list-group-flush">
+
+                            <li class="list-group-item">
+                                Remaining Day:
+                                <% if(task.remainingDays.includes("Overdue")) { %>
+
+                                    <span class="text-danger fw-bold">
+
+                                        <%= task.remainingDays %>
+
+                                    </span>
+
+                                    <% } else if(task.remainingDays==="Due Today" ) { %>
+
+                                        <span class="text-warning fw-bold">
+
+                                            <%= task.remainingDays %>
+
+                                        </span>
+
+                                        <% } else { %>
+
+                                            <span class="text-success">
+
+                                                <%= task.remainingDays %>
+
+                                            </span>
+
+                                            <% } %>
+                            </li>
+
+                            <li class="list-group-item">
+                                Status: <%= task.status %>
+
+                            </li>
+
+                        </ul>
+
+                        <div class="card-body d-flex justify-content-between">
+
+                            <button type="button" class="btn btn-light ">
+                                Edit Task
+                            </button>
+
+                            <%if(task.status!="Completed"){%>
+                                <button type="button" class="btn btn-success">
+                                    Done
+                                </button>
+                                <%}%>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <% }) %>
+
+        </div>
+
+    </div>
